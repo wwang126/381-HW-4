@@ -6,6 +6,7 @@ import Data.Function (fix)
 import KarelSyntax
 import KarelState
 
+-- Wavelet Wang ONID:wangwav
 
 -- | Valuation function for Test.
 test :: Test -> World -> Robot -> Bool
@@ -19,7 +20,7 @@ stmt PickBeeper _ w r = let p = getPos r
                               then OK (decBeeper p w) (incBag r)
                               else Error ("No beeper to pick at: " ++ show p)
 stmt _ _ _ _ = undefined
-    
+
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
 prog (m,s) w r = stmt s m w r
