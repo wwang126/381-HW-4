@@ -6,6 +6,7 @@ import Data.Function (fix)
 import KarelSyntax
 import KarelState
 
+#David Okubo - okubod
 
 -- | Valuation function for Test.
 test :: Test -> World -> Robot -> Bool
