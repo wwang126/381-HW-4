@@ -6,6 +6,7 @@ import Data.Function (fix)
 import KarelSyntax
 import KarelState
 
+-- David Okubo - okubod
 -- Sean Cramsey -- cramseys
 
 -- | Valuation function for Test.
