@@ -6,7 +6,10 @@ import Data.Function (fix)
 import KarelSyntax
 import KarelState
 
--- Sean Cramsey -- cramseys
+
+-- Wavelet Wang ONID:wangwav
+-- David Okubo ONID:okubod
+-- Sean Cramsey ONID:cramseys
 
 -- | Valuation function for Test.
 test :: Test -> World -> Robot -> Bool
