@@ -6,11 +6,19 @@ import Data.Function (fix)
 import KarelSyntax
 import KarelState
 
+
 -- Wavelet Wang ONID:wangwav
+-- David Okubo ONID:okubod
+-- Sean Cramsey ONID:cramseys
 
 -- | Valuation function for Test.
 test :: Test -> World -> Robot -> Bool
-test = undefined
+test (Not t)
+test (Facing c)
+test (Clear d)
+test Beeper
+test Empty
+
 
 -- | Valuation function for Stmt.
 stmt :: Stmt -> Defs -> World -> Robot -> Result
