@@ -10,11 +10,11 @@ import KarelState
 
 -- | Valuation function for Test.
 test :: Test -> World -> Robot -> Bool
-test (Not t)
-test (Facing c)
-test (Clear d)
-test Beeper
-test Empty
+test (Not t) w r = not (test t w r)
+test (Facing c) w r = getFacing r == c
+test (Clear d) w (p, c, i) = isClear (neighbor (cardTurn d c) p) w
+test Beeper w (p, _, _) = hasBeeper p w
+test Empty _ r = isEmpty r
 
 
 -- | Valuation function for Stmt.
