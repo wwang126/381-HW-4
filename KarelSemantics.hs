@@ -30,11 +30,11 @@ stmt PickBeeper _ w r = let p = getPos r
 stmt Move _ w r = let n = neighbor(getFacing r)(getPos r)
                   in if test(Clear Front) w r
                     then OK w (setPos n  r)
-                    else Error ("Obstruction at: " ++ show n)
+                    else Error ("Blocked at: " ++ show n)
 
 stmt PutBeeper _ w r = let p = getPos r
                         in if isEmpty r
-                            then Error ("Error: No beeper to put.")
+                            then Error ("No beeper to put.")
                             else OK (incBeeper p w) (decBag r)
 stmt (Turn d) _ w r = let c = getFacing r
                       in if c == cardTurn d c
@@ -50,21 +50,21 @@ stmt (If t x y) d w r = case (test t w r) of
                           True -> stmt x d w r
                           False -> stmt y d w r
 stmt (Call m) d w r = case lookup m d of
-                    Nothing -> Error ("Error: Undefined macro: " ++ m)
+                    Nothing -> Error ("Undefined macro: " ++ m)
                     Just s -> stmt s d w r
 
 stmt (While t s) d w r = if test t w r then case stmt s d w r of
                                             OK nw nr -> stmt (While t s) d nw nr
                                             otherwise -> otherwise
                         else OK w r
-stmt (Iterate i s) d w r = let ni + 1 = i
+stmt (Iterate i s) d w r = let ni = i - 1
                            in case ni of
-                             0 -> OK w r
+                             -1 -> OK w r
                              otherwise -> case stmt s d w r of
                                           OK nw nr -> stmt (Iterate ni s) d nw nr
                                           otherwise -> otherwise
 
-stmt _ _ _ _ = undefined
+--stmt _ _ _ _ = undefined
 
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
