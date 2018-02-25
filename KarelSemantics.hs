@@ -42,6 +42,10 @@ stmt (Turn d) _ w r = let c = getFacing r
                       in if c == cardTurn d c
                           then Error ("Already facing " ++ show c)
                           else OK w (setFacing (cardTurn d c) r)
+stmt (Block []) d w r = OK w r
+stmt (Block (s:ns)) d w r = case stmt s d w r of
+                          OK nw nr -> stmt (Block ns) d nw nr
+                          otherwise -> otherwise
 stmt _ _ _ _ = undefined
 
 -- | Run a Karel program.
