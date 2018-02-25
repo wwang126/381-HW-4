@@ -30,11 +30,11 @@ stmt PickBeeper _ w r = let p = getPos r
 stmt Move _ w r = let n = neighbor(getFacing r)(getPos r)
                   in if test(Clear Front) w r
                     then OK w (setPos n  r)
-                    else Error ("Error: Blocked at: " ++ show n)
+                    else Error ("Blocked at: " ++ show n)
 
 stmt PutBeeper _ w r = let p = getPos r
                         in if isEmpty r
-                            then Error ("Error: No beeper to put.")
+                            then Error ("No beeper to put.")
                             else OK (incBeeper p w) (decBag r)
 stmt (Turn d) _ w r = let c = getFacing r
                       in if c == cardTurn d c
@@ -50,7 +50,7 @@ stmt (If t x y) d w r = case (test t w r) of
                           True -> stmt x d w r
                           False -> stmt y d w r
 stmt (Call m) d w r = case lookup m d of
-                    Nothing -> Error ("Error: Undefined macro: " ++ m)
+                    Nothing -> Error ("Undefined macro: " ++ m)
                     Just s -> stmt s d w r
 
 stmt _ _ _ _ = undefined
