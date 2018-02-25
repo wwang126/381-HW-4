@@ -54,10 +54,17 @@ stmt (Call m) d w r = case lookup m d of
                     Just s -> stmt s d w r
 
 stmt (While t s) d w r = if test t w r then case stmt s d w r of
-                                            OK nw nr -> stmt (While t s) d w r
+                                            OK nw nr -> stmt (While t s) d nw nr
                                             otherwise -> otherwise
                         else OK w r
-stmt _ _ _ _ = undefined
+stmt (Iterate i s) d w r = let ni = i - 1
+                           in case ni of
+                             -1 -> OK w r
+                             otherwise -> case stmt s d w r of
+                                          OK nw nr -> stmt (Iterate ni s) d nw nr
+                                          otherwise -> otherwise
+
+--stmt _ _ _ _ = undefined
 
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
