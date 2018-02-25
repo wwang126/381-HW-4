@@ -33,11 +33,9 @@ stmt Move _ w r = let n = neighbor(getFacing r)(getPos r)
                     else Error ("Obstruction at: " ++ show n)
 
 stmt PutBeeper _ w r = let p = getPos r
-                        in if hasBeeper p w
-                            then Error ("Beeper already present at:" ++ show p)
-                            else if isEmpty r
-                                then Error ("Beeper bag empty!")
-                                else OK (incBeeper p w) (decBag r)
+                        in if isEmpty r
+                            then Error ("Beeper bag empty!")
+                            else OK (incBeeper p w) (decBag r)
 stmt (Turn d) _ w r = let c = getFacing r
                       in if c == cardTurn d c
                           then Error ("Already facing " ++ show c)
