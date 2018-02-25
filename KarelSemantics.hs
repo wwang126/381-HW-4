@@ -53,6 +53,10 @@ stmt (Call m) d w r = case lookup m d of
                     Nothing -> Error ("Error: Undefined macro: " ++ m)
                     Just s -> stmt s d w r
 
+stmt (While t s) d w r = if test t w r then case stmt s d w r of
+                                            OK nw nr -> (while t s) d w r
+                                            otherwise -> otherwise                 
+                        else OK w r
 stmt _ _ _ _ = undefined
 
 -- | Run a Karel program.
