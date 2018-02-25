@@ -30,7 +30,7 @@ stmt PickBeeper _ w r = let p = getPos r
 stmt Move _ w r = let n = neighbor(getFacing r)(getPos r)
                   in if test(Clear Front) w r
                     then OK w (setPos n  r)
-                    else Error ("Obstruction at: " ++ show n)
+                    else Error ("Error: Blocked at: " ++ show n)
 
 stmt PutBeeper _ w r = let p = getPos r
                         in if isEmpty r
