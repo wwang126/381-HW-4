@@ -49,7 +49,9 @@ stmt (Block (s:ns)) d w r = case stmt s d w r of
 stmt (If t x y) d w r = case (test t w r) of
                           True -> stmt x d w r
                           False -> stmt y d w r
-
+stmt (Call m) d w r = case lookup m d of
+                    Nothing -> Error ("Error: Undefined macro: " ++ m)
+                    Just s -> stmt s d w r
 
 stmt _ _ _ _ = undefined
 
