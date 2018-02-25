@@ -34,7 +34,7 @@ stmt Move _ w r = let n = neighbor(getFacing r)(getPos r)
 
 stmt PutBeeper _ w r = let p = getPos r
                         in if isEmpty r
-                            then Error ("Beeper bag empty!")
+                            then Error ("Error: No beeper to put.")
                             else OK (incBeeper p w) (decBag r)
 stmt (Turn d) _ w r = let c = getFacing r
                       in if c == cardTurn d c
